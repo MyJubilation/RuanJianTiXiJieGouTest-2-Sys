@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    window.onload = function() {
+        var h2Element = document.getElementById('text');
+        h2Element.textContent = text;
+    }
+    let text = "package com.beetles.ruanjiantixijiegoutest2sys.controller.shiijan;\n" +
+        "import java.util.Observable;\n" +
+        "import java.util.Observer;\n" +
+        "/**\n" +
+        " * @author beetles\n" +
+        " * @date 2024/10/15\n" +
+        " * @Description\n" +
+        " */\n" +
+        "public class shijian {\n" +
+        "    public int math(int num) {\n" +
+        "        PrimeGenerator generator = new PrimeGenerator();\n" +
+        "        generator.addObserver(new PrimeObserver());\n" +
+        "        return generator.generatePrimes(100);\n" +
+        "    }\n" +
+        "\n" +
+        "}\n" +
+        "\n" +
+        "\n" +
+        "class PrimeGenerator extends Observable {\n" +
+        "    public int generatePrimes(int limit) {\n" +
+        "        int cnt=0;\n" +
+        "        for (int i = 2; i < limit; i++) {\n" +
+        "            if (isPrime(i)) {\n" +
+        "                setChanged();\n" +
+        "                notifyObservers(i);\n" +
+        "                cnt++;\n" +
+        "            }\n" +
+        "        }\n" +
+        "        return cnt;\n" +
+        "    }\n" +
+        "\n" +
+        "    private boolean isPrime(int number) {\n" +
+        "        if (number <= 1) {\n" +
+        "            return false;\n" +
+        "        }\n" +
+        "        for (int i = 2; i <= Math.sqrt(number); i++) {\n" +
+        "            if (number % i == 0) {\n" +
+        "                return false;\n" +
+        "            }\n" +
+        "        }\n" +
+        "        return true;\n" +
+        "    }\n" +
+        "}\n" +
+        "\n" +
+        "class PrimeObserver implements Observer {\n" +
+        "    @Override\n" +
+        "    public void update(Observable o, Object arg) {\n" +
+        "        System.out.println(arg);\n" +
+        "    }\n" +
+        "}\n";
+
+
+
+    function inputButton() {
+        var i =0;
+        $.ajax({
+            type:"GET",
+            url:"http://localhost:8080/shijian/math",
+            // data: {
+            //     value: i // 将要传递的值放在一个对象中
+            // },
+            success: function(data){
+                console.log("success");
+                console.log(data);
+                const resultData = document.getElementById('result');
+                resultData.textContent = data;
+            },
+            error: function(data){
+                console.log("error");
+            }
+        });
+    }
+
+
+    // var button = document.getElementById("inputButton1");
+    // button.addEventListener('click', inputButton);
+</script>
+<div class="mainWeb">
+    <p style="display: flex; justify-content: center;">事件风格</p>
+    <button id="inputButton1" onclick="inputButton()">计算100内素数个数</button>
+    <h2>结果为：<p id="result"></p></h2>
+</div>
+<div style="display: flex; justify-content: center;">
+    <p>代码演示：</p>
+    <pre><code id="text"></code></pre>
+</div>
+</body>
+</html>

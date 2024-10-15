@@ -1,0 +1,20 @@
+.showButton{
+
+}
+.mainWeb{
+/*    整体div的css设计*/
+    height: 100vh;
+    width: 100vw;
+
+
+}
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buttonDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
